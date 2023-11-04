@@ -31,7 +31,7 @@ def GetIRCIp():
 			elif (op == b'ERROR'):
 				ip = data.split()[4]
 				print('Received', repr(data))
-				SendSMSTelegram(ip)
+				SendSMSTelegram(str(ip))
 			else:
 				data = s.recv(1024)
 				print('Received', repr(data))
