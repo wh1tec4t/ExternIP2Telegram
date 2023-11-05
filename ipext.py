@@ -16,13 +16,13 @@ def SendSMSTelegram(sms):
 
 def GetIRCIp():
 
-	IRCHOST = 'xxxxxx'
+	IRCHOST = 'xxxx'
 	IRCPORT = 6667
 
 	with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
-		# Espera 5' a que el nick zoombie anterior salga por ping timeout en caso de reconexion abrupta.
-		time.sleep(300)
+		# Espera 3' a que el nick zoombie anterior salga por ping timeout en caso de reconexion abrupta.
+		time.sleep(180)
 
 		ip_ini = 0
 		ip_fin = 0
@@ -40,16 +40,18 @@ def GetIRCIp():
 				s.send(b'PONG %b\r\n' % pingid)
 
 			if (op == b'ERROR'):
-				ip_fin = data.split()[3]
-				SendSMSTelegram("IpFin: " + str(ip_fin))
+				ip = data.split()[3]
+				ip_fin = ip.split("@")[1]
+				SendSMSTelegram("Disconnected - Old IP was: " + str(ip_fin))
 
 			if (ip_ini == 0):
 				data = s.recv(1024)
-				ip_ini = data.split()[9]
-				SendSMSTelegram("IpIni: " + str(ip_ini))
+				ip = data.split()[9]
+				ip_ini = ip.split("@")[1]
+				SendSMSTelegram("Connected - New IP is: " + str(ip_ini))
 
 			data = s.recv(1024)
 
 
 if __name__ == '__main__':
-	while True: GetIRCIp()
+	GetIRCIp()
