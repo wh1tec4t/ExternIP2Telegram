@@ -10,4 +10,4 @@ Dependencies:
 - Minimal dependencies: socks to IRC connection and requests to Messenger connection.
 
 Execution as a daemon on Linux system:
-#nohup python3 ipext.py &
+- #nohup python3 ipext.py &
