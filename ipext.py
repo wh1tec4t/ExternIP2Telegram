@@ -13,7 +13,7 @@ def SendSMSTelegram(sms):
 
 def GetIRCIp():
 
-	IRCHOST = 'xxxx'
+	IRCHOST = 'irc.slynetwork.es'
 	IRCPORT = 6667
 	BOTNICK = None
 
